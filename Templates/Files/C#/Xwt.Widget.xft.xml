@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Template>
+	<TemplateConfiguration>
+		<_Name>Widget</_Name>
+		<_Category>Xwt</_Category>
+		<Icon>md-gui-file</Icon>
+		<LanguageName>C#</LanguageName>
+		<DefaultFilename>CustomWidget</DefaultFilename>
+		<_Description>Creates a Xwt Widget.</_Description>
+	</TemplateConfiguration>
+	<TemplateFiles>
+        <File name="${Name}.cs" AddStandardHeader="True">
+			<![CDATA[using Xwt;
+
+namespace ${Namespace}
+{
+	public class ${EscapedIdentifier} : Widget
+	{
+		public ${EscapedIdentifier} ()
+		{
+			Content = new Label ("Replace the label by custom content");
+		}
+	}
+}
+]]></File>
+	</TemplateFiles>
+</Template>

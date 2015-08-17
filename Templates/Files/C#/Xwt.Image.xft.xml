@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Template>
+	<TemplateConfiguration>
+		<_Name>Custom Drawn Image</_Name>
+		<_Category>Xwt</_Category>
+		<Icon>md-gui-file</Icon>
+		<LanguageName>C#</LanguageName>
+		<DefaultFilename>CustomImage</DefaultFilename>
+		<_Description>Creates a custom drawn Xwt Image.</_Description>
+	</TemplateConfiguration>
+	<TemplateFiles>
+        <File name="${Name}.cs" AddStandardHeader="True">
+			<![CDATA[using Xwt;
+using Xwt.Drawing;
+
+namespace ${Namespace}
+{
+	public class ${EscapedIdentifier} : DrawingImage
+	{
+		protected override void OnDraw (Context ctx, Rectangle bounds)
+		{
+			
+		}
+	}
+}
+]]></File>
+	</TemplateFiles>
+</Template>

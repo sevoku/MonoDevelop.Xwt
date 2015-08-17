@@ -1,0 +1,246 @@
+﻿<?xml version="1.0"?>
+<Template>
+	<TemplateConfiguration>
+		<_Name>Xwt Application</_Name>
+		<Category>crossplat/app/xwt</Category>
+		<Icon>md-project-gui</Icon>
+		<Image id="md-gtk2-project" />
+		<LanguageName>C#</LanguageName>
+		<Wizard>MonoDevelop.Xwt.XwtTemplateWizard</Wizard>
+		<_Description>
+<![CDATA[Creates a new Xwt cross-platform application.
+
+This template creates several projects:
+one library for shared ui logic,
+one application project for each platform backend supported by Xwt.
+]]></_Description>
+		<DefaultFilename>XwtProject</DefaultFilename>
+		<GroupId>xwt-project-application-gtk2</GroupId>
+		<SupportedParameters></SupportedParameters>
+	</TemplateConfiguration>
+	<Actions>
+		<Open filename="MainWindow.cs"/>
+	</Actions>
+
+	<Combine name="${ProjectName}" directory=".">
+		<Options>
+			<StartupProject>${ProjectName}.Gtk2</StartupProject>
+		</Options>
+
+		<Project name="${ProjectName}" directory=".">
+			<Options Target="Library" />
+			<References>
+				<Reference type="Package" refto="System" />
+				<Reference type="Package" SpecificVersion="false" refto="Xwt" LocalCopy="True" if="XwtSourceLocal"/>
+			</References>
+			<Packages>
+				<Package Id="Xwt" if="XwtSourceNuGet"/>
+			</Packages>
+			<Files>
+				<File name="MainWindow.cs" AddStandardHeader="True" src="MainWindow.cs"/>
+				<FileTemplateReference TemplateID="CSharpAssemblyInfo" name="Properties/AssemblyInfo.cs" />
+			</Files>
+		</Project>
+
+		<Project name="${ProjectName}.Wpf" directory="./${ProjectName}.Wpf">
+			<Options Target="WinExe"/>
+			<References>
+				<Reference type="Package" refto="System" />
+				<Reference type="Project" refto="${ProjectName}"/>
+				<Reference type="Package" SpecificVersion="false" refto="Xwt" LocalCopy="True" if="XwtSourceLocal"/>
+				<Reference type="Package" SpecificVersion="false" refto="Xwt.WPF" LocalCopy="True" if="XwtSourceLocal"/>
+			</References>
+			<Packages>
+				<Package Id="Xwt"  if="XwtSourceNuGet"/>
+				<Package Id="Xwt.WPF"  if="XwtSourceNuGet"/>
+			</Packages>
+			<Files>
+				<File name="Program.cs" AddStandardHeader="True"><![CDATA[using System;
+using Xwt;
+namespace ${Namespace}
+{
+	public class Program
+	{
+		[STAThread]
+		public static void Main (string[] args)
+		{
+			Application.Initialize (ToolkitType.Wpf);
+
+			MainWindow w = new MainWindow ();
+			w.Show ();
+
+			Application.Run ();
+
+			w.Dispose ();
+			Application.Dispose ();
+		}
+	}
+}
+]]>
+				</File>
+				<FileTemplateReference TemplateID="CSharpAssemblyInfo" name="Properties/AssemblyInfo.cs" />
+			</Files>
+		</Project>
+
+		<Project name="${ProjectName}.Gtk2" directory="./${ProjectName}.Gtk2">
+			<Options Target="WinExe"/>
+			<References>
+				<Reference type="Package" refto="System" />
+				<Reference type="Project" refto="${ProjectName}"/>
+				<Reference type="Package" SpecificVersion="false" refto="Xwt" LocalCopy="True" if="XwtSourceLocal"/>
+				<Reference type="Package" SpecificVersion="false" refto="Xwt.Gtk" LocalCopy="True" if="XwtSourceLocal"/>
+			</References>
+			<Packages>
+				<Package Id="Xwt"  if="XwtSourceNuGet"/>
+				<Package Id="Xwt.Gtk"  if="XwtSourceNuGet"/>
+			</Packages>
+			<Files>
+				<File name="Program.cs" AddStandardHeader="True"><![CDATA[using System;
+using Xwt;
+namespace ${Namespace}
+{
+	public class Program
+	{
+		[STAThread]
+		public static void Main (string[] args)
+		{
+			Application.Initialize (ToolkitType.Gtk);
+
+			MainWindow w = new MainWindow ();
+			w.Show ();
+
+			Application.Run ();
+
+			w.Dispose ();
+			Application.Dispose ();
+		}
+	}
+}
+]]>
+				</File>
+				<FileTemplateReference TemplateID="CSharpAssemblyInfo" name="Properties/AssemblyInfo.cs" />
+			</Files>
+		</Project>
+
+		<Project name="${ProjectName}.Gtk3" directory="./${ProjectName}.Gtk3">
+			<Options Target="WinExe"/>
+			<References>
+				<Reference type="Package" refto="System" />
+				<Reference type="Project" refto="${ProjectName}"/>
+				<Reference type="Package" SpecificVersion="false" refto="Xwt" LocalCopy="True" if="XwtSourceLocal"/>
+				<Reference type="Package" SpecificVersion="false" refto="Xwt.Gtk3" LocalCopy="True" if="XwtSourceLocal"/>
+			</References>
+			<Packages>
+				<Package Id="Xwt"  if="XwtSourceNuGet"/>
+				<Package Id="Xwt.Gtk3"  if="XwtSourceNuGet"/>
+			</Packages>
+			<Files>
+				<File name="Program.cs" AddStandardHeader="True"><![CDATA[using System;
+using Xwt;
+namespace ${Namespace}
+{
+	public class Program
+	{
+		[STAThread]
+		public static void Main (string[] args)
+		{
+			Application.Initialize (ToolkitType.Gtk3);
+
+			MainWindow w = new MainWindow ();
+			w.Show ();
+
+			Application.Run ();
+
+			w.Dispose ();
+			Application.Dispose ();
+		}
+	}
+}
+]]>
+				</File>
+				<FileTemplateReference TemplateID="CSharpAssemblyInfo" name="Properties/AssemblyInfo.cs" />
+			</Files>
+		</Project>
+
+		<Project name="${ProjectName}.Mac" directory="./${ProjectName}.Mac" type="MonoMac">
+			<References>
+				<Reference type="Package" refto="System" />
+				<Reference type="Project" refto="${ProjectName}"/>
+				<Reference type="Package" SpecificVersion="false" refto="Xwt" LocalCopy="True" if="XwtSourceLocal" />
+				<Reference type="Package" SpecificVersion="false" refto="Xwt.Mac" LocalCopy="True" if="XwtSourceLocal"/>
+			</References>
+			<Packages>
+				<Package Id="Xwt"  if="XwtSourceNuGet"/>
+				<Package Id="Xwt.Mac"  if="XwtSourceNuGet"/>
+			</Packages>
+			<Files>
+				<File name="Program.cs" AddStandardHeader="True"><![CDATA[using System;
+using Xwt;
+namespace ${Namespace}
+{
+	public class Program
+	{
+		[STAThread]
+		public static void Main (string[] args)
+		{
+			Application.Initialize (ToolkitType.Cocoa);
+
+			MainWindow w = new MainWindow ();
+			w.Show ();
+
+			Application.Run ();
+
+			w.Dispose ();
+			Application.Dispose ();
+		}
+	}
+}
+]]>
+				</File>
+				<File name="Info.plist" src="../Info.plist" />
+				<FileTemplateReference TemplateID="CSharpAssemblyInfo" name="Properties/AssemblyInfo.cs" />
+			</Files>
+		</Project>
+
+		<Project name="${ProjectName}.XamMac" directory="./${ProjectName}.XamMac" type="XamMac2">
+			<References>
+				<Reference type="Package" refto="System" />
+				<Reference type="Package" refto="Xamarin.Mac" />
+				<Reference type="Project" refto="${ProjectName}"/>
+				<Reference type="Package" SpecificVersion="false" refto="Xwt" LocalCopy="True" if="XwtSourceLocal" />
+				<Reference type="Package" SpecificVersion="false" refto="Xwt.XamMac" LocalCopy="True" if="XwtSourceLocal"/>
+			</References>
+			<Packages>
+				<Package Id="Xwt"  if="XwtSourceNuGet"/>
+				<Package Id="Xwt.XamMac"  if="XwtSourceNuGet"/>
+			</Packages>
+			<Files>
+				<File name="Program.cs" AddStandardHeader="True"><![CDATA[using System;
+using Xwt;
+namespace ${Namespace}
+{
+	public class Program
+	{
+		[STAThread]
+		public static void Main (string[] args)
+		{
+			Application.Initialize (ToolkitType.XamMac);
+
+			MainWindow w = new MainWindow ();
+			w.Show ();
+
+			Application.Run ();
+
+			w.Dispose ();
+			Application.Dispose ();
+		}
+	}
+}
+]]>
+				</File>
+				<File name="Info.plist" src="../Info.plist" />
+				<FileTemplateReference TemplateID="CSharpAssemblyInfo" name="Properties/AssemblyInfo.cs" />
+			</Files>
+		</Project>
+	</Combine>
+</Template>

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Template>
+	<TemplateConfiguration>
+		<_Name>Window</_Name>
+		<_Category>Xwt</_Category>
+		<Icon>md-gui-file</Icon>
+		<LanguageName>C#</LanguageName>
+		<DefaultFilename>CustomWindow</DefaultFilename>
+		<_Description>Creates a Xwt Window.</_Description>
+	</TemplateConfiguration>
+	<TemplateFiles>
+        <File name="${Name}.cs" AddStandardHeader="True">
+			<![CDATA[using Xwt;
+
+namespace ${Namespace}
+{
+	public class ${EscapedIdentifier} : Window
+	{
+		public ${EscapedIdentifier} ()
+		{
+			Title = "${ProjectName} - ${EscapedIdentifier}";
+
+			Content = new Label ("Content");
+		}
+	}
+}
+]]></File>
+	</TemplateFiles>
+</Template>
