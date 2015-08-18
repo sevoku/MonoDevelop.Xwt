@@ -13,4 +13,4 @@
 	"including executable projects for supported Xwt backends and " +
 	"automatic platform detection.")]
 [assembly:AddinAuthor ("Vsevolod Kukol")]
-
+[assembly:AddinUrl ("https://github.com/sevoku/MonoDevelop.Xwt.git")]
