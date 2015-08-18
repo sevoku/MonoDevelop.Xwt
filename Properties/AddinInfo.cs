@@ -1,8 +1,8 @@
 ﻿using Mono.Addins;
 
 [assembly:Addin (
-	"MonoDevelop.Xwt", 
-	Namespace = "MonoDevelop.Xwt",
+	"Xwt", 
+	Namespace = "MonoDevelop",
 	Version = "1.0"
 )]
 
