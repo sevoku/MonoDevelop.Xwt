@@ -43,7 +43,7 @@ and special application projects for Mac/XamarinMac (if supported).
 			<Files>
 				<File name="MainWindow.cs" AddStandardHeader="True" src="MainWindow.cs"/>
 				<File name="App.cs" AddStandardHeader="True" src="App.cs" />
-				<File name="App/App.Internal.cs" AddStandardHeader="True" src="App.Internal.cs" />
+				<File name="App.Internal.cs" AddStandardHeader="True" src="App.Internal.cs" DependsOn="App.cs" SuppressAutoOpen="True" />
 				<FileTemplateReference TemplateID="CSharpAssemblyInfo" name="Properties/AssemblyInfo.cs" />
 			</Files>
 		</Project>

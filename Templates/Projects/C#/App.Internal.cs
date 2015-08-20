@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Xwt;
 
@@ -7,6 +6,24 @@ namespace ${Namespace}
 {
 	public static partial class App
 	{
+		static ToolkitType toolkitWindows = ToolkitType.Wpf;
+		static ToolkitType toolkitLinux = ToolkitType.Gtk;
+		static ToolkitType toolkitMacOS = ToolkitType.XamMac;
+
+		public static ToolkitType ToolkitWindows {
+			get { return toolkitWindows; }
+			set { toolkitWindows = value; }
+		}
+
+		public static ToolkitType ToolkitLinux {
+			get { return toolkitLinux; }
+			set { toolkitLinux = value; }
+		}
+
+		public static ToolkitType ToolkitMacOS {
+			get { return toolkitMacOS; }
+			set { toolkitMacOS = value; }
+		}
 		
 		public static void Run (string[] args)
 		{
