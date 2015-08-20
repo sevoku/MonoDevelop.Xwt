@@ -37,12 +37,25 @@ namespace MonoDevelop.Xwt
 		{
 			Page = page;
 
-			var optBuiltIn = new RadioButton(GettextCatalog.GetString ("Local Package"));
-			var optGithub = new RadioButton(GettextCatalog.GetString ("GitHub repository")) {
-				TooltipText = GettextCatalog.GetString ("Xwt will be added to an Xwt folder\ninside the root of the solution.")
+			var optBuiltIn = new RadioButton(GettextCatalog.GetString ("Local Package / GAC")) {
+				TooltipText = GettextCatalog.GetString (
+					"Xwt must be installed to the GAC (Global Assembly Cache),\n" +
+					"otherwise you will have to add a HintPath property manually.")
 			};
-
-			var optNuGet = new RadioButton(GettextCatalog.GetString ("NuGet package"));
+			var optGithub = new RadioButton(GettextCatalog.GetString ("GitHub repository")) {
+				TooltipText = GettextCatalog.GetString (
+					"A separate solution folder named 'Xwt' will be added to the solution.\n" +
+					"If the solution already contains the Xwt project,\nit will be referenced instead" +
+					"and the git checkout will be skipped.")
+			};
+			var linkGithub = new Label {
+				Markup = "(<a href='https://github.com/mono/xwt'>Official Repository</a>)",
+				TooltipText = "https://github.com/mono/xwt"
+			};
+			var optNuGet = new RadioButton(GettextCatalog.GetString ("NuGet package")) {
+				TooltipText = GettextCatalog.GetString ("All registered NuGet repositories will be searched.")
+			};
+			                               
 			var sourceGroup = optBuiltIn.Group = optGithub.Group = optNuGet.Group;
 			sourceGroup.ActiveRadioButtonChanged += (sender, e) => {
 				if (sourceGroup.ActiveRadioButton == optGithub)
@@ -52,13 +65,16 @@ namespace MonoDevelop.Xwt
 				else
 					Page.XwtReferenceSource = XwtSource.Local;
 			};
-			optBuiltIn.Active = true;
+			optGithub.Active = true;
 
 			CheckBox chkGitSubmodule = null;
 
 			if (page.Wizard.Parameters["CreateSolution"] == true.ToString ()) {
-				chkGitSubmodule = new CheckBox(GettextCatalog.GetString ("Register Git Submodule\n(will be committed automatically)"));
-				chkGitSubmodule.Sensitive = false;
+				chkGitSubmodule = new CheckBox(GettextCatalog.GetString ("Register Git Submodule\n(will be committed automatically)")) {
+					TooltipText = GettextCatalog.GetString (
+						"Only if you enable git version control for the new project in the last creation step.\n" +
+						"The Xwt submodule will be registered and initialized during the creation process.")
+				};
 				chkGitSubmodule.MarginLeft = 30;
 				chkGitSubmodule.Toggled += (sender, e) => Page.XwtGitSubmodule = chkGitSubmodule.Active;
 
@@ -75,10 +91,13 @@ namespace MonoDevelop.Xwt
 
 			// use inner table for selection to make it easier to add more options
 			var tblSource = new Table ();
-			tblSource.Add (optBuiltIn, 0, 0);
-			tblSource.Add (optGithub, 0, 1);
-			if (chkGitSubmodule != null) tblSource.Add (chkGitSubmodule, 0, 2);
-			tblSource.Add (optNuGet, 0, 3);
+			var boxGithub = new HBox ();
+			boxGithub.PackStart (optGithub);
+			boxGithub.PackStart (linkGithub);
+			tblSource.Add (boxGithub, 0, 0);
+			if (chkGitSubmodule != null) tblSource.Add (chkGitSubmodule, 0, 1);
+			tblSource.Add (optNuGet, 0, 2);
+			tblSource.Add (optBuiltIn, 0, 3);
 
 			tbl.Add (new Label (GettextCatalog.GetString ("Xwt reference source:")), 0, 0, vpos: WidgetPlacement.Start, hpos: WidgetPlacement.End);
 			tbl.Add (tblSource, 1, 0);
