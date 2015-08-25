@@ -24,12 +24,12 @@ namespace ${Namespace}
 			get { return toolkitMacOS; }
 			set { toolkitMacOS = value; }
 		}
-		
-		public static void Run (string[] args)
-		{
-			InitializeXwt ();
 
-			OnRun  (args);
+		public static void Run (ToolkitType toolkit, string[] args)
+		{
+			Application.Initialize (toolkit);
+
+			OnRun (args);
 
 			Application.Run ();
 
@@ -37,21 +37,35 @@ namespace ${Namespace}
 			Application.Dispose ();
 		}
 
-		static void InitializeXwt ()
+		public static void Run (string[] args)
+		{
+			ToolkitType? toolkit = null;
+			foreach (var arg in args)
+			{
+				if (arg.ToLower ().StartsWith ("toolkittype", StringComparison.Ordinal) && arg.Contains ("=")) {
+					var tkname = arg.Split ('=') [1].Trim ();
+					try {
+						toolkit = (ToolkitType?)Enum.Parse (typeof(ToolkitType), tkname, true);
+					} catch (ArgumentException ex) {
+						throw new ArgumentException ("Unknown Xwt Toolkit type: " + tkname, ex);
+					}
+				}
+			}
+
+			Run (toolkit ?? DetectPlatformToolkit(), args);
+		}
+
+		static ToolkitType DetectPlatformToolkit ()
 		{
 			switch (Environment.OSVersion.Platform) {
 				case PlatformID.MacOSX:
-					Application.Initialize (ToolkitMacOS);
-					break;
+					return ToolkitMacOS;
 				case PlatformID.Unix:
 					if (IsRunningOnMac ())
-						Application.Initialize (ToolkitMacOS);
-					else
-						Application.Initialize (ToolkitLinux);
-					break;
+						return ToolkitMacOS;
+					return ToolkitLinux;
 				default:
-					Application.Initialize (ToolkitWindows);
-					break;
+					return ToolkitWindows;
 			}
 		}
 
