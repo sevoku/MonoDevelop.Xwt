@@ -91,6 +91,7 @@ namespace ${Namespace}
 		<Project name="${ProjectName}.Mac" directory="./${ProjectName}.Mac" type="MonoMac">
 			<References>
 				<Reference type="Package" refto="System" />
+				<Reference type="Package" refto="MonoMac" />
 				<Reference type="Project" refto="${ProjectName}"/>
 				<Reference type="Package" SpecificVersion="false" refto="Xwt" LocalCopy="True" if="XwtSourceLocal" />
 				<Reference type="Package" SpecificVersion="false" refto="Xwt.Mac" LocalCopy="True" if="XwtSourceLocal"/>
@@ -109,7 +110,7 @@ namespace ${Namespace}
 		[STAThread]
 		public static void Main (string[] args)
 		{
-			App.Run (args);
+			App.Run (ToolkitType.Cocoa, args);
 		}
 	}
 }
