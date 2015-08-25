@@ -45,7 +45,7 @@ namespace MonoDevelop.Xwt
 			var optGithub = new RadioButton(GettextCatalog.GetString ("GitHub repository")) {
 				TooltipText = GettextCatalog.GetString (
 					"A separate solution folder named 'Xwt' will be added to the solution.\n" +
-					"If the solution already contains the Xwt project,\nit will be referenced instead" +
+					"If the solution already contains the Xwt project,\nit will be referenced instead " +
 					"and the git checkout will be skipped.")
 			};
 			var linkGithub = new Label {
