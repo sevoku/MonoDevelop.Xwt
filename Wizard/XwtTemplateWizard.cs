@@ -250,6 +250,10 @@ namespace MonoDevelop.Xwt
 							}
 						}
 
+						if (project.Name == newProjectName + ".Wpf") {
+							project.References.Add (xwt_wpf_ref);
+						}
+
 						if (project.Name == newProjectName + ".Gtk3") {
 							project.References.Add (xwt_gtk3_ref);
 						}
