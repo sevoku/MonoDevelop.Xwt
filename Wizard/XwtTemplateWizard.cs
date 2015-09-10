@@ -98,7 +98,8 @@ namespace MonoDevelop.Xwt
 					solution.RootFolder.Items.Add (xwt_folder);
 				}
 
-				monitor.BeginTask ("Configuring Xwt References...", 4);
+				monitor.BeginTask ("Configuring Xwt References...", 3);
+				monitor.BeginTask ("Cloning Xwt into " + xwt_path + "...", 1);
 
 				if (xwt_proj == null && !Directory.Exists (xwt_path)) {
 					if (createSubmodule && gitRepo != null) {
@@ -121,7 +122,6 @@ namespace MonoDevelop.Xwt
 						}
 
 						monitor.EndTask ();
-						monitor.Step (1);
 						monitor.BeginTask ("Comitting changes...", 1);
 
 						var commit = git.Commit ();
@@ -129,18 +129,14 @@ namespace MonoDevelop.Xwt
 						commit.Call ();
 
 						monitor.EndTask ();
-						monitor.Step (1);
 					} else {
-						monitor.Step (1);
-						monitor.BeginTask ("Cloning Xwt into " + xwt_path + "...", 1);
-
 						var repo = new GitRepository(xwt_path, "git://github.com/mono/xwt");
 						repo.Checkout (xwt_path, true, monitor);
-
-						monitor.EndTask ();
-						monitor.Step (1);
 					}
 				}
+
+				monitor.EndTask ();
+				monitor.Step (1);
 
 				monitor.BeginTask ("Adding Xwt Projects to Solution...", 7);
 
@@ -220,6 +216,7 @@ namespace MonoDevelop.Xwt
 
 
 				monitor.EndTask ();
+				monitor.Step (1);
 				monitor.BeginTask ("Adding Xwt References...", solution.Items.Count);
 
 				foreach (var item in solution.Items) {
@@ -269,7 +266,6 @@ namespace MonoDevelop.Xwt
 				}
 
 				monitor.EndTask ();
-				monitor.Step (1);
 				monitor.EndTask ();
 				monitor.ReportSuccess ("Xwt Submodule initialized successfully");
 
