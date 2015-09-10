@@ -41,34 +41,34 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <AddinFile Include="Templates\Files\C#\Xwt.Image.xft.xml">
+    <AddinFile Include="Templates\Files\CS\Xwt.Image.xft.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AddinFile>
-    <AddinFile Include="Templates\Files\C#\Xwt.Widget.xft.xml">
+    <AddinFile Include="Templates\Files\CS\Xwt.Widget.xft.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AddinFile>
-    <AddinFile Include="Templates\Files\C#\Xwt.Window.xft.xml">
+    <AddinFile Include="Templates\Files\CS\Xwt.Window.xft.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AddinFile>
-    <AddinFile Include="Templates\Projects\C#\App.cs">
+    <AddinFile Include="Templates\Projects\CS\App.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AddinFile>
-    <AddinFile Include="Templates\Projects\C#\App.Internal.cs">
+    <AddinFile Include="Templates\Projects\CS\App.Internal.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AddinFile>
-    <AddinFile Include="Templates\Projects\C#\MainWindow.cs">
+    <AddinFile Include="Templates\Projects\CS\MainWindow.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AddinFile>
-    <AddinFile Include="Templates\Projects\C#\Xwt.Application.Hybrid.xpt.xml">
+    <AddinFile Include="Templates\Projects\CS\Xwt.Application.Hybrid.xpt.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AddinFile>
-    <AddinFile Include="Templates\Projects\C#\Xwt.Application.xpt.xml">
+    <AddinFile Include="Templates\Projects\CS\Xwt.Application.xpt.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AddinFile>
-    <AddinFile Include="Templates\Projects\C#\Xwt.Library.xpt.xml">
+    <AddinFile Include="Templates\Projects\CS\Xwt.Library.xpt.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AddinFile>
-    <AddinFile Include="Templates\Files\C#\Xwt.Canvas.xft.xml">
+    <AddinFile Include="Templates\Files\CS\Xwt.Canvas.xft.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AddinFile>
     <AddinFile Include="Templates\Projects\Info.plist">

@@ -16,9 +16,9 @@
 	</Extension>
 
 	<Extension path="/MonoDevelop/Ide/ProjectTemplates">
-		<ProjectTemplate id="xwt.application.hybrid.cs" file="Templates/Projects/C#/Xwt.Application.Hybrid.xpt.xml" />
-		<ProjectTemplate id="xwt.application.cs" file="Templates/Projects/C#/Xwt.Application.xpt.xml" />
-		<ProjectTemplate id="xwt.library.cs" file="Templates/Projects/C#/Xwt.Library.xpt.xml" />
+		<ProjectTemplate id="xwt.application.hybrid.cs" file="Templates/Projects/CS/Xwt.Application.Hybrid.xpt.xml" />
+		<ProjectTemplate id="xwt.application.cs" file="Templates/Projects/CS/Xwt.Application.xpt.xml" />
+		<ProjectTemplate id="xwt.library.cs" file="Templates/Projects/CS/Xwt.Library.xpt.xml" />
 	</Extension>
 
 	<Extension path="/MonoDevelop/Ide/ProjectTemplateWizards">
@@ -26,10 +26,10 @@
 	</Extension>
 
 	<Extension path="/MonoDevelop/Ide/FileTemplates">
-		<FileTemplate id="Xwt.Window.cs" file="Templates/Files/C#/Xwt.Window.xft.xml" />
-		<FileTemplate id="Xwt.Widget.cs" file="Templates/Files/C#/Xwt.Widget.xft.xml" />
-		<FileTemplate id="Xwt.Canvas.cs" file="Templates/Files/C#/Xwt.Canvas.xft.xml" />
-		<FileTemplate id="Xwt.Image.cs" file="Templates/Files/C#/Xwt.Image.xft.xml" />
+		<FileTemplate id="Xwt.Window.cs" file="Templates/Files/CS/Xwt.Window.xft.xml" />
+		<FileTemplate id="Xwt.Widget.cs" file="Templates/Files/CS/Xwt.Widget.xft.xml" />
+		<FileTemplate id="Xwt.Canvas.cs" file="Templates/Files/CS/Xwt.Canvas.xft.xml" />
+		<FileTemplate id="Xwt.Image.cs" file="Templates/Files/CS/Xwt.Image.xft.xml" />
 	</Extension>
 
 </ExtensionModel>

@@ -15,7 +15,7 @@ one library for shared ui logic,
 one application project for each platform backend supported by Xwt.
 ]]></_Description>
 		<DefaultFilename>XwtProject</DefaultFilename>
-		<GroupId>xwt-project-application-gtk2</GroupId>
+		<GroupId>xwt-project-application</GroupId>
 		<SupportedParameters></SupportedParameters>
 	</TemplateConfiguration>
 	<Actions>
