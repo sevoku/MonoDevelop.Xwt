@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Template>
+	<TemplateConfiguration>
+		<_Name>Widget</_Name>
+		<_Category>Xwt</_Category>
+		<Icon>md-gui-file</Icon>
+		<LanguageName>VBNet</LanguageName>
+		<DefaultFilename>CustomWidget</DefaultFilename>
+		<_Description>Creates a Xwt Widget.</_Description>
+	</TemplateConfiguration>
+	<TemplateFiles>
+        <File name="${Name}.vb" AddStandardHeader="True">
+			<![CDATA[Option Explicit On
+Option Strict On
+
+Imports System
+Imports Xwt
+
+Public Class ${EscapedIdentifier}
+	Inherits Widget
+	
+	Public Sub New()
+        Content = New Label("Replace the label by custom content")
+	End Sub
+
+End Class
+]]></File>
+	</TemplateFiles>
+</Template>

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Template>
+	<TemplateConfiguration>
+		<_Name>Custom Drawn Image</_Name>
+		<_Category>Xwt</_Category>
+		<Icon>md-gui-file</Icon>
+		<LanguageName>VBNet</LanguageName>
+		<DefaultFilename>CustomImage</DefaultFilename>
+		<_Description>Creates a custom drawn Xwt Image.</_Description>
+	</TemplateConfiguration>
+	<TemplateFiles>
+        <File name="${Name}.vb" AddStandardHeader="True">
+			<![CDATA[Option Explicit On
+Option Strict On
+
+Imports System
+Imports Xwt
+Imports Xwt.Drawing
+
+Public Class ${EscapedIdentifier}
+	Inherits DrawingImage
+
+    Protected Overrides Sub OnDraw(ctx As Context, bounds As Rectangle)
+        
+    End Sub
+
+End Class
+]]></File>
+	</TemplateFiles>
+</Template>

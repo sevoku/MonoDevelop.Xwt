@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Template>
+	<TemplateConfiguration>
+		<_Name>Custom Drawn Widget</_Name>
+		<_Category>Xwt</_Category>
+		<Icon>md-gui-file</Icon>
+		<LanguageName>VBNet</LanguageName>
+		<DefaultFilename>CustomCanvas</DefaultFilename>
+		<_Description>Creates a Xwt Canvas for custom ui elements.</_Description>
+	</TemplateConfiguration>
+	<TemplateFiles>
+        <File name="${Name}.vb" AddStandardHeader="True">
+			<![CDATA[Option Explicit On
+Option Strict On
+
+Imports System
+Imports Xwt
+Imports Xwt.Drawing
+
+Public Class ${EscapedIdentifier}
+	Inherits Canvas
+
+    Protected Overrides Sub OnDraw(ctx As Context, dirtyRect As Rectangle)
+        
+    End Sub
+
+End Class
+]]></File>
+	</TemplateFiles>
+</Template>

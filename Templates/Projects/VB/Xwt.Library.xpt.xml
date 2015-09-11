@@ -1,0 +1,38 @@
+﻿<?xml version="1.0"?>
+<Template>
+	<TemplateConfiguration>
+		<_Name>Xwt Library</_Name>
+		<Category>crossplat/library/xwt</Category>
+		<Icon>md-project-library</Icon>
+		<Image id="md-library-project" />
+		<LanguageName>VBNet</LanguageName>
+		<Wizard>MonoDevelop.Xwt.XwtTemplateWizard</Wizard>
+		<_Description>A library for shared Xwt cross-platform UI logic.</_Description>
+		<DefaultFilename>XwtLibrary</DefaultFilename>
+		<GroupId>xwt-project-library</GroupId>
+		<SupportedParameters>Library</SupportedParameters>
+	</TemplateConfiguration>
+
+	<Actions>
+		<Open filename="CustomWidget.vb"/>
+	</Actions>
+
+	<Combine name="${ProjectName}" directory=".">
+		
+		<Project name="${ProjectName}" directory=".">
+			<Options Target="Library" TargetFrameworkVersion="v4.0"/>
+			<References>
+				<Reference type="Package" refto="System" />
+				<Reference type="Package" SpecificVersion="false" refto="Xwt" LocalCopy="True" if="XwtSourceLocal"/>
+			</References>
+			<Packages>
+				<Package Id="Xwt" if="XwtSourceNuGet"/>
+			</Packages>
+			<Files>
+				<FileTemplateReference TemplateID="Xwt.Widget.vb" name="CustomWidget.vb" />
+			<FileTemplateReference TemplateID="VBAssemblyInfo" name="AssemblyInfo.vb" />
+			</Files>
+		</Project>
+
+	</Combine>
+</Template>

@@ -19,6 +19,12 @@
 		<ProjectTemplate id="xwt.application.hybrid.cs" file="Templates/Projects/CS/Xwt.Application.Hybrid.xpt.xml" />
 		<ProjectTemplate id="xwt.application.cs" file="Templates/Projects/CS/Xwt.Application.xpt.xml" />
 		<ProjectTemplate id="xwt.library.cs" file="Templates/Projects/CS/Xwt.Library.xpt.xml" />
+
+		<Condition id="AssemblyInstalled" name="MonoDevelop.VBNetBinding">
+			<ProjectTemplate id="xwt.application.hybrid.vb" file="Templates/Projects/VB/Xwt.Application.Hybrid.xpt.xml" />
+			<ProjectTemplate id="xwt.application.vb" file="Templates/Projects/VB/Xwt.Application.xpt.xml" />
+			<ProjectTemplate id="xwt.library.vb" file="Templates/Projects/VB/Xwt.Library.xpt.xml" />
+		</Condition>
 	</Extension>
 
 	<Extension path="/MonoDevelop/Ide/ProjectTemplateWizards">
@@ -30,6 +36,13 @@
 		<FileTemplate id="Xwt.Widget.cs" file="Templates/Files/CS/Xwt.Widget.xft.xml" />
 		<FileTemplate id="Xwt.Canvas.cs" file="Templates/Files/CS/Xwt.Canvas.xft.xml" />
 		<FileTemplate id="Xwt.Image.cs" file="Templates/Files/CS/Xwt.Image.xft.xml" />
+
+		<Condition id="AssemblyInstalled" name="MonoDevelop.VBNetBinding">
+			<FileTemplate id="Xwt.Window.vb" file="Templates/Files/VB/Xwt.Window.xft.xml" />
+			<FileTemplate id="Xwt.Widget.vb" file="Templates/Files/VB/Xwt.Widget.xft.xml" />
+			<FileTemplate id="Xwt.Canvas.vb" file="Templates/Files/VB/Xwt.Canvas.xft.xml" />
+			<FileTemplate id="Xwt.Image.vb" file="Templates/Files/VB/Xwt.Image.xft.xml" />
+		</Condition>
 	</Extension>
 
 </ExtensionModel>

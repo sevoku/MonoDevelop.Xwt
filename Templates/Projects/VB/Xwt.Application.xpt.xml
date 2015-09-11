@@ -1,0 +1,217 @@
+﻿<?xml version="1.0"?>
+<Template>
+	<TemplateConfiguration>
+		<_Name>Xwt Application</_Name>
+		<Category>crossplat/app/xwt</Category>
+		<Icon>md-project-gui</Icon>
+		<Image id="md-gtk2-project" />
+		<LanguageName>VBNet</LanguageName>
+		<Wizard>MonoDevelop.Xwt.XwtTemplateWizard</Wizard>
+		<_Description>
+<![CDATA[Creates a new Xwt cross-platform application.
+
+This template creates several projects:
+one library for shared ui logic,
+one application project for each platform backend supported by Xwt.
+]]></_Description>
+		<DefaultFilename>XwtProject</DefaultFilename>
+		<GroupId>xwt-project-application</GroupId>
+		<SupportedParameters></SupportedParameters>
+	</TemplateConfiguration>
+	<Actions>
+		<Open filename="MainWindow.vb"/>
+	</Actions>
+
+	<Combine name="${ProjectName}" directory=".">
+		<Options>
+			<StartupProject>${ProjectName}.Gtk2</StartupProject>
+		</Options>
+
+		<Project name="${ProjectName}" directory=".">
+			<Options Target="Library" TargetFrameworkVersion="v4.0"/>
+			<References>
+				<Reference type="Package" refto="System" />
+				<Reference type="Package" SpecificVersion="false" refto="Xwt" LocalCopy="True" if="XwtSourceLocal"/>
+			</References>
+			<Packages>
+				<Package Id="Xwt" if="XwtSourceNuGet"/>
+			</Packages>
+			<Files>
+				<File name="MainWindow.vb" AddStandardHeader="True" src="MainWindow.vb" />
+				<FileTemplateReference TemplateID="VBAssemblyInfo" name="AssemblyInfo.vb" />
+			</Files>
+		</Project>
+
+		<Project name="${ProjectName}.Wpf" directory="./${ProjectName}.Wpf">
+			<Options Target="WinExe" TargetFrameworkVersion="v4.0"/>
+			<References>
+				<Reference type="Package" refto="System" />
+				<Reference type="Project" refto="${ProjectName}"/>
+				<Reference type="Package" SpecificVersion="false" refto="Xwt" LocalCopy="True" if="XwtSourceLocal"/>
+				<Reference type="Package" SpecificVersion="false" refto="Xwt.WPF" LocalCopy="True" if="XwtSourceLocal"/>
+			</References>
+			<Packages>
+				<Package Id="Xwt"  if="XwtSourceNuGet"/>
+				<Package Id="Xwt.WPF"  if="XwtSourceNuGet"/>
+			</Packages>
+			<Files>
+				<File name="Program.vb" AddStandardHeader="True"><![CDATA[Imports Xwt
+Imports System
+
+Public Class Program
+	<STAThread>
+    Public Shared Sub Main(ByVal args As String())
+        Application.Initialize(ToolkitType.Wpf)
+        Dim MainWindow As new MainWindow()
+        MainWindow.Show()
+        Application.Run()
+        MainWindow.Dispose()
+        Application.Dispose()
+    End Sub
+End Class]]>
+				</File>
+				<FileTemplateReference TemplateID="VBAssemblyInfo" name="AssemblyInfo.vb" />
+			</Files>
+		</Project>
+
+		<Project name="${ProjectName}.Gtk2" directory="./${ProjectName}.Gtk2">
+			<Options Target="WinExe" TargetFrameworkVersion="v4.0"/>
+			<References>
+				<Reference type="Package" refto="System" />
+				<Reference type="Project" refto="${ProjectName}"/>
+				<Reference type="Package" SpecificVersion="false" refto="Xwt" LocalCopy="True" if="XwtSourceLocal"/>
+				<Reference type="Package" SpecificVersion="false" refto="Xwt.Gtk" LocalCopy="True" if="XwtSourceLocal"/>
+			</References>
+			<Packages>
+				<Package Id="Xwt"  if="XwtSourceNuGet"/>
+				<Package Id="Xwt.Gtk"  if="XwtSourceNuGet"/>
+			</Packages>
+			<Files>
+				<File name="Program.vb" AddStandardHeader="True"><![CDATA[Imports Xwt
+Imports System
+
+Public Class Program
+	<STAThread>
+    Public Shared Sub Main(ByVal args As String())
+        Application.Initialize(ToolkitType.Gtk)
+        Dim MainWindow As new MainWindow()
+        MainWindow.Show()
+        Application.Run()
+        MainWindow.Dispose()
+        Application.Dispose()
+    End Sub
+End Class]]>
+				</File>
+				<FileTemplateReference TemplateID="VBAssemblyInfo" name="AssemblyInfo.vb" />
+			</Files>
+		</Project>
+
+		<Project name="${ProjectName}.Gtk3" directory="./${ProjectName}.Gtk3">
+			<Options Target="WinExe" TargetFrameworkVersion="v4.0"/>
+			<References>
+				<Reference type="Package" refto="System" />
+				<Reference type="Project" refto="${ProjectName}"/>
+				<Reference type="Package" SpecificVersion="false" refto="Xwt" LocalCopy="True" if="XwtSourceLocal"/>
+				<Reference type="Package" SpecificVersion="false" refto="Xwt.Gtk3" LocalCopy="True" if="XwtSourceLocal"/>
+			</References>
+			<Packages>
+				<Package Id="Xwt"  if="XwtSourceNuGet"/>
+				<Package Id="Xwt.Gtk3"  if="XwtSourceNuGet"/>
+			</Packages>
+			<Files>
+				<File name="Program.vb" AddStandardHeader="True"><![CDATA[Imports Xwt
+Imports System
+
+Public Class Program
+	<STAThread>
+    Public Shared Sub Main(ByVal args As String())
+        Application.Initialize(ToolkitType.Gtk3)
+        Dim MainWindow As new MainWindow()
+        MainWindow.Show()
+        Application.Run()
+        MainWindow.Dispose()
+        Application.Dispose()
+    End Sub
+End Class]]>
+				</File>
+				<FileTemplateReference TemplateID="VBAssemblyInfo" name="AssemblyInfo.vb" />
+			</Files>
+		</Project>
+
+		<Project name="${ProjectName}.Mac" directory="./${ProjectName}.Mac" type="MonoMac">
+			<Options TargetFrameworkVersion="v4.0"/>
+			<References>
+				<Reference type="Package" refto="System" />
+				<Reference type="Package" refto="MonoMac" />
+				<Reference type="Project" refto="${ProjectName}"/>
+				<Reference type="Package" SpecificVersion="false" refto="Xwt" LocalCopy="True" if="XwtSourceLocal" />
+				<Reference type="Package" SpecificVersion="false" refto="Xwt.Mac" LocalCopy="True" if="XwtSourceLocal"/>
+			</References>
+			<Packages>
+				<Package Id="Xwt"  if="XwtSourceNuGet"/>
+				<Package Id="Xwt.Mac"  if="XwtSourceNuGet"/>
+			</Packages>
+			<Files>
+				<File name="Program.vb" AddStandardHeader="True"><![CDATA[Imports Xwt
+Imports System
+
+Public Class Program
+	<STAThread>
+    Public Shared Sub Main(ByVal args As String())
+        Application.Initialize(ToolkitType.Cocoa)
+        Dim MainWindow As new MainWindow()
+        MainWindow.Show()
+        Application.Run()
+        MainWindow.Dispose()
+        Application.Dispose()
+    End Sub
+End Class]]>
+				</File>
+				<File name="Info.plist" src="../Info.plist" />
+				<FileTemplateReference TemplateID="VBAssemblyInfo" name="AssemblyInfo.vb" />
+			</Files>
+		</Project>
+
+		<Project name="${ProjectName}.XamMac" directory="./${ProjectName}.XamMac" type="XamMac2">
+			<Options language="C#"/>
+			<References>
+				<Reference type="Package" refto="System" />
+				<Reference type="Package" refto="Xamarin.Mac" />
+				<Reference type="Project" refto="${ProjectName}"/>
+				<Reference type="Package" SpecificVersion="false" refto="Xwt" LocalCopy="True" if="XwtSourceLocal" />
+				<Reference type="Package" SpecificVersion="false" refto="Xwt.XamMac" LocalCopy="True" if="XwtSourceLocal"/>
+			</References>
+			<Packages>
+				<Package Id="Xwt"  if="XwtSourceNuGet"/>
+				<Package Id="Xwt.XamMac"  if="XwtSourceNuGet"/>
+			</Packages>
+			<Files>
+				<File name="Program.cs" AddStandardHeader="True"><![CDATA[using System;
+using Xwt;
+namespace ${Namespace}
+{
+	public class Program
+	{
+		[STAThread]
+		public static void Main (string[] args)
+		{
+			Application.Initialize (ToolkitType.XamMac);
+
+			MainWindow w = new MainWindow ();
+			w.Show ();
+
+			Application.Run ();
+
+			w.Dispose ();
+			Application.Dispose ();
+		}
+	}
+}
+]]>
+				</File>
+				<File name="Info.plist" src="../Info.plist" />
+				<FileTemplateReference TemplateID="CSharpAssemblyInfo" name="Properties/AssemblyInfo.cs" />
+			</Files>
+		</Project>
+	</Combine>
+</Template>
