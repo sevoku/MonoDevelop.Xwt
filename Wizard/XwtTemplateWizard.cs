@@ -55,32 +55,46 @@ namespace MonoDevelop.Xwt
 
 		public override void ItemsCreated (IEnumerable<IWorkspaceFileObject> items)
 		{
-			if (Parameters ["XwtSourceGithub"] == true.ToString ()) {
-				foreach (var item in items) {
+			Solution gitSolution = null;
 
-					var solution = item as Solution;
+			foreach (var item in items) {
+				var solution = item as Solution;
 
-					if (solution == null) {
-						var project = item as DotNetProject;
-						if (project != null)
-							solution = project.ParentSolution;
-						else continue;
+				if (solution == null) {
+					var project = item as DotNetProject;
+					if (project != null) {
+						solution = project.ParentSolution;
+						ConfigureProjectIfVBNet (project);
 					}
-
-					var monitor = new MessageDialogProgressMonitor (true, true, true, true);
-					ThreadPool.QueueUserWorkItem (delegate {
-						AddXwtFromGithub (
-							solution,
-							Parameters ["UserDefinedProjectName"],
-							Parameters ["XwtGitSubmodule"] == true.ToString (),
-							monitor);
-					});
-
-					break;
+				} else {
+					foreach (var project in solution.GetAllProjects ()) {
+						ConfigureProjectIfVBNet (project as DotNetProject);
+					}
 				}
+
+				if (gitSolution == null)
+					gitSolution = solution;
+			}
+			
+			if (gitSolution != null && Parameters ["XwtSourceGithub"] == true.ToString ())
+			{
+				var monitor = new MessageDialogProgressMonitor (true, true, true, true);
+				ThreadPool.QueueUserWorkItem (delegate {
+					AddXwtFromGithub (
+						gitSolution,
+						Parameters ["UserDefinedProjectName"],
+						Parameters ["XwtGitSubmodule"] == true.ToString (),
+						monitor);
+				});
 			}
 
 			base.ItemsCreated (items);
+		}
+
+		void ConfigureProjectIfVBNet (DotNetProject project)
+		{
+			if (project != null && project.LanguageName == "VBNet")
+				project.UseMSBuildEngine = false;
 		}
 
 		void AddXwtFromGithub (Solution solution, string newProjectName, bool createSubmodule, IProgressMonitor monitor)
