@@ -3,7 +3,7 @@
 [assembly:Addin (
 	"Xwt", 
 	Namespace = "MonoDevelop",
-	Version = "1.1.0"
+	Version = "1.2.0"
 )]
 
 [assembly:AddinName ("Xwt Project Support")]

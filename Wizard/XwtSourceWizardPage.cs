@@ -95,7 +95,7 @@ namespace MonoDevelop.Xwt
 			return true;
 		}
 
-		protected override object CreateNativeWidget ()
+		protected override object CreateNativeWidget<T> ()
 		{
 			if (view == null) {
 				view = new XwtSourcePageWidget (this);

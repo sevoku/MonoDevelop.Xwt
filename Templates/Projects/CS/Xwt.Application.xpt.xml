@@ -2,7 +2,7 @@
 <Template>
 	<TemplateConfiguration>
 		<_Name>Xwt Application</_Name>
-		<Category>crossplat/app/xwt</Category>
+		<Category>multiplat/app/xwt</Category>
 		<Icon>md-project-gui</Icon>
 		<Image id="md-gtk2-project" />
 		<LanguageName>C#</LanguageName>
@@ -30,7 +30,8 @@ one application project for each platform backend supported by Xwt.
 		<Project name="${ProjectName}" directory=".">
 			<Options Target="Library" />
 			<References>
-				<Reference type="Package" refto="System" />
+				<Reference type="Gac" refto="System" />
+				<Reference type="Gac" refto="System.Core" />
 				<Reference type="Package" SpecificVersion="false" refto="Xwt" LocalCopy="True" if="XwtSourceLocal"/>
 			</References>
 			<Packages>
@@ -45,7 +46,8 @@ one application project for each platform backend supported by Xwt.
 		<Project name="${ProjectName}.Wpf" directory="./${ProjectName}.Wpf">
 			<Options Target="WinExe"/>
 			<References>
-				<Reference type="Package" refto="System" />
+				<Reference type="Gac" refto="System" />
+				<Reference type="Gac" refto="System.Core" />
 				<Reference type="Project" refto="${ProjectName}"/>
 				<Reference type="Package" SpecificVersion="false" refto="Xwt" LocalCopy="True" if="XwtSourceLocal"/>
 				<Reference type="Package" SpecificVersion="false" refto="Xwt.WPF" LocalCopy="True" if="XwtSourceLocal"/>
@@ -85,7 +87,8 @@ namespace ${Namespace}
 		<Project name="${ProjectName}.Gtk2" directory="./${ProjectName}.Gtk2">
 			<Options Target="WinExe"/>
 			<References>
-				<Reference type="Package" refto="System" />
+				<Reference type="Gac" refto="System" />
+				<Reference type="Gac" refto="System.Core" />
 				<Reference type="Project" refto="${ProjectName}"/>
 				<Reference type="Package" SpecificVersion="false" refto="Xwt" LocalCopy="True" if="XwtSourceLocal"/>
 				<Reference type="Package" SpecificVersion="false" refto="Xwt.Gtk" LocalCopy="True" if="XwtSourceLocal"/>
@@ -125,7 +128,8 @@ namespace ${Namespace}
 		<Project name="${ProjectName}.Gtk3" directory="./${ProjectName}.Gtk3">
 			<Options Target="WinExe"/>
 			<References>
-				<Reference type="Package" refto="System" />
+				<Reference type="Gac" refto="System" />
+				<Reference type="Gac" refto="System.Core" />
 				<Reference type="Project" refto="${ProjectName}"/>
 				<Reference type="Package" SpecificVersion="false" refto="Xwt" LocalCopy="True" if="XwtSourceLocal"/>
 				<Reference type="Package" SpecificVersion="false" refto="Xwt.Gtk3" LocalCopy="True" if="XwtSourceLocal"/>
@@ -164,8 +168,9 @@ namespace ${Namespace}
 
 		<Project name="${ProjectName}.Mac" directory="./${ProjectName}.Mac" type="MonoMac">
 			<References>
-				<Reference type="Package" refto="System" />
-				<Reference type="Package" refto="MonoMac" />
+				<Reference type="Gac" refto="System" />
+				<Reference type="Gac" refto="System.Core" />
+				<Reference type="Gac" refto="MonoMac" SpecificVersion="false" />
 				<Reference type="Project" refto="${ProjectName}"/>
 				<Reference type="Package" SpecificVersion="false" refto="Xwt" LocalCopy="True" if="XwtSourceLocal" />
 				<Reference type="Package" SpecificVersion="false" refto="Xwt.Mac" LocalCopy="True" if="XwtSourceLocal"/>
@@ -205,8 +210,9 @@ namespace ${Namespace}
 
 		<Project name="${ProjectName}.XamMac" directory="./${ProjectName}.XamMac" type="XamMac2">
 			<References>
-				<Reference type="Package" refto="System" />
-				<Reference type="Package" refto="Xamarin.Mac" />
+				<Reference type="Gac" refto="System" />
+				<Reference type="Gac" refto="System.Core" />
+				<Reference type="Gac" refto="Xamarin.Mac" />
 				<Reference type="Project" refto="${ProjectName}"/>
 				<Reference type="Package" SpecificVersion="false" refto="Xwt" LocalCopy="True" if="XwtSourceLocal" />
 				<Reference type="Package" SpecificVersion="false" refto="Xwt.XamMac" LocalCopy="True" if="XwtSourceLocal"/>

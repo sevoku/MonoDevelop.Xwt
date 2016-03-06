@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using MonoDevelop.Core;
+using MonoDevelop.Ide.Gui;
 using Xwt;
 using Xwt.Drawing;
 
@@ -87,7 +88,7 @@ namespace MonoDevelop.Xwt
 			}
 
 			var tbl = new Table ();
-			BackgroundColor = Color.FromBytes (225, 228, 232);
+			BackgroundColor = Styles.NewProjectDialog.ProjectConfigurationLeftHandBackgroundColor;
 
 			// use inner table for selection to make it easier to add more options
 			var tblSource = new Table ();
@@ -103,7 +104,7 @@ namespace MonoDevelop.Xwt
 			tbl.Add (tblSource, 1, 0);
 
 			var rightFrame = new FrameBox ();
-			rightFrame.BackgroundColor = Colors.White;
+			rightFrame.BackgroundColor = Styles.NewProjectDialog.ProjectConfigurationRightHandBackgroundColor; ;
 			rightFrame.WidthRequest = 280;
 
 			Spacing = 0;

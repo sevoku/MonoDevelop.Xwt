@@ -30,15 +30,15 @@ using NGit;
 namespace MonoDevelop.Xwt
 {
 
-	class GitMonitor: ProgressMonitor, IDisposable
+	class GitMonitor: NGit.ProgressMonitor, IDisposable
 	{
-		readonly IProgressMonitor monitor;
+		readonly Core.ProgressMonitor monitor;
 		int currentWork;
 		int currentStep;
 		bool taskStarted;
 		bool monitorStarted;
 
-		public GitMonitor (IProgressMonitor monitor)
+		public GitMonitor (Core.ProgressMonitor monitor)
 		{
 			this.monitor = monitor;
 		}
@@ -84,7 +84,7 @@ namespace MonoDevelop.Xwt
 
 		public override bool IsCancelled ()
 		{
-			return monitor.IsCancelRequested;
+			return monitor.CancellationToken.IsCancellationRequested;
 		}
 
 		public void Dispose ()
