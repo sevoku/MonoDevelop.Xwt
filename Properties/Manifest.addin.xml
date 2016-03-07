@@ -37,4 +37,12 @@
 		<FileTemplate id="Xwt.Image.vb" file="Templates/Files/VB/Xwt.Image.xft.xml" />
 	</Extension>
 
+	<Extension path="/MonoDevelop/Debugging/DebugValueConverters">
+		<Type class="MonoDevelop.Xwt.ColorConverter" />
+	</Extension>
+	
+	<Extension path="/MonoDevelop/Debugging/PreviewVisualizers">
+		<Type class="MonoDevelop.Xwt.ColorPreviewVisualizer" />
+	</Extension>
+
 </ExtensionModel>
