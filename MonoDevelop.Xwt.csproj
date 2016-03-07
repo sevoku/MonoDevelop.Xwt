@@ -35,6 +35,8 @@
     <Compile Include="Wizard\XwtSourcePageWidget.cs" />
     <Compile Include="Wizard\XwtSourceWizardPage.cs" />
     <Compile Include="Wizard\XwtTemplateWizard.cs" />
+    <Compile Include="Visualizers\ColorPreviewVisualizer.cs" />
+    <Compile Include="Visualizers\ColorConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\MonoDevelop.Addins.0.3.0\build\net40\MonoDevelop.Addins.targets" Condition="Exists('packages\MonoDevelop.Addins.0.3.0\build\net40\MonoDevelop.Addins.targets')" />
@@ -109,6 +111,7 @@
   <ItemGroup>
     <AddinReference Include="MonoDevelop.VersionControl" />
     <AddinReference Include="MonoDevelop.VersionControl.Git" />
+    <AddinReference Include="MonoDevelop.Debugger" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -140,5 +143,8 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Manifest.addin.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Visualizers\" />
   </ItemGroup>
 </Project>
