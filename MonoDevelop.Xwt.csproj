@@ -113,17 +113,34 @@
     <AddinReference Include="MonoDevelop.Debugger" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Xwt, Version=0.1.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
-      <Package>monodevelop</Package>
-    </Reference>
-    <Reference Include="Sharpen">
-      <HintPath>packages\Sharpen.1.0.0.3\lib\Sharpen.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Addins, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
-      <Package>mono-addins</Package>
-    </Reference>
+    <Reference Include="Xwt, Version=0.1.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <Reference Include="Mono.Addins, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>packages\ngit2.2.1.0.20130924\lib\net40\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Posix">
+      <HintPath>packages\ngit2.2.1.0.20130924\lib\net40\Mono.Posix.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Security">
+      <HintPath>packages\ngit2.2.1.0.20130924\lib\net40\Mono.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Security.Win32">
+      <HintPath>packages\ngit2.2.1.0.20130924\lib\net40\Mono.Security.Win32.dll</HintPath>
+    </Reference>
+    <Reference Include="NGit">
+      <HintPath>packages\ngit2.2.1.0.20130924\lib\net40\NGit.dll</HintPath>
+    </Reference>
+    <Reference Include="NSch">
+      <HintPath>packages\ngit2.2.1.0.20130924\lib\net40\NSch.dll</HintPath>
+    </Reference>
+    <Reference Include="Sharpen">
+      <HintPath>packages\ngit2.2.1.0.20130924\lib\net40\Sharpen.dll</HintPath>
+    </Reference>
+    <Reference Include="Sharpen.Unix">
+      <HintPath>packages\ngit2.2.1.0.20130924\lib\net40\Sharpen.Unix.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Manifest.addin.xml" />
