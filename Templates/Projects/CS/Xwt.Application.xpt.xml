@@ -212,6 +212,7 @@ namespace ${Namespace}
 			<References>
 				<Reference type="Gac" refto="System" />
 				<Reference type="Gac" refto="System.Core" />
+				<Reference type="Gac" refto="System.Xaml" />
 				<Reference type="Gac" refto="Xamarin.Mac" />
 				<Reference type="Project" refto="${ProjectName}"/>
 				<Reference type="Package" SpecificVersion="false" refto="Xwt" LocalCopy="True" if="XwtSourceLocal" />

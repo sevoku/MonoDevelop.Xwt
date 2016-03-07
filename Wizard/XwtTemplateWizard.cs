@@ -26,6 +26,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using MonoDevelop.Core;
 using MonoDevelop.Ide;
@@ -64,13 +65,11 @@ namespace MonoDevelop.Xwt
 					var project = item as DotNetProject;
 					if (project != null) {
 						solution = project.ParentSolution;
-						ConfigureProjectIfVBNet (project);
+						ConfigureProject (project);
 					}
-				} else {
-					foreach (var project in solution.GetAllProjects ()) {
-						ConfigureProjectIfVBNet (project as DotNetProject);
-					}
-				}
+				} else foreach (var project in solution.GetAllProjects ())
+						ConfigureProject (project as DotNetProject);
+				
 
 				if (gitSolution == null)
 					gitSolution = solution;
@@ -91,10 +90,27 @@ namespace MonoDevelop.Xwt
 			base.ItemsCreated (items);
 		}
 
-		void ConfigureProjectIfVBNet (DotNetProject project)
+		void ConfigureProject (DotNetProject project)
 		{
+			if (project == null)
+				return;
 			if (project != null && project.LanguageName == "VBNet")
 				project.UseMSBuildEngine = false;
+			if (project.MSBuildProject != null) {
+				if (project.MSBuildProject.ProjectTypeGuids.Select (t => t.ToUpper ()).Contains ("{948B3504-5B70-4649-8FE4-BDE1FB46EC69}")) {
+					project.MSBuildProject.GetGlobalPropertyGroup ().SetValue ("SuppressXamMacMigration", true);
+					project.MSBuildProject.Save (project.MSBuildProject.FileName);
+				}
+				else if (project.MSBuildProject.ProjectTypeGuids.Select (t => t.ToUpper ()).Contains ("{A3F8F2AB-B479-4A4A-A458-A89E7DC349F1}")) {
+					project.MSBuildProject.GetGlobalPropertyGroup ().SetValue ("UseXamMacFullFramework", true);
+					project.MSBuildProject.Save (project.MSBuildProject.FileName);
+				}
+			}
+		}
+
+		void ConfigureProjectIfMonoMac (DotNetProject project)
+		{
+			
 		}
 
 		async Task AddXwtFromGithubAsync (Solution solution, string newProjectName, bool createSubmodule, ProgressMonitor monitor)
