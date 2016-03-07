@@ -144,7 +144,8 @@ namespace MonoDevelop.Xwt
 
 						monitor.EndTask ();
 					} else {
-						var repo = new GitRepository(xwt_path, "git://github.com/mono/xwt");
+						var repo = new GitRepository ();
+						repo.Url = "git://github.com/mono/xwt";
 						repo.Checkout (xwt_path, true, monitor);
 					}
 				}
