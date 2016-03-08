@@ -56,6 +56,13 @@ namespace MonoDevelop.Xwt
 
 		public override void ItemsCreated (IEnumerable<IWorkspaceFileObject> items)
 		{
+			if (Parameters ["UserDefinedProjectName"].ToUpper () == "XWT" && Parameters ["XwtSourceGithub"] == true.ToString ()) {
+				MessageService.ShowError ("Unsupported Project Name: " + Parameters ["UserDefinedProjectName"],
+							  "Cloning Xwt from Github is not supported with the chosen project name '" + Parameters ["UserDefinedProjectName"] + "'.\n\n" +
+				                          "Please restart the new project wizard and choose a different name for your project or a different Xwt source.");
+				return;
+			}
+			
 			Solution gitSolution = null;
 
 			foreach (var item in items) {
@@ -118,6 +125,17 @@ namespace MonoDevelop.Xwt
 			try {
 				var gitRepo = VersionControlService.GetRepository (solution) as GitRepository;
 				var xwt_proj = solution.FindProjectByName ("Xwt") as DotNetProject;
+
+				if (xwt_proj != null && xwt_proj.ItemId.ToUpper () != "{92494904-35FA-4DC9-BDE9-3A3E87AC49D3}") {
+					xwt_proj = null;
+					foreach (var item in solution.GetAllProjectsWithFlavor<DotNetProjectExtension>()) {
+						if (item.ItemId.ToUpper () == "{92494904-35FA-4DC9-BDE9-3A3E87AC49D3}") {
+							xwt_proj = item as DotNetProject;
+							break;
+						}
+					}
+				}
+
 				var xwt_path = xwt_proj == null ? solution.BaseDirectory.Combine ("Xwt") : xwt_proj.BaseDirectory.ParentDirectory;
 
 				monitor.BeginTask ("Configuring Xwt References...", 3);
