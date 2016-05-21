@@ -42,6 +42,7 @@
   <Import Project="packages\MonoDevelop.Addins.0.3.0\build\net40\MonoDevelop.Addins.targets" Condition="Exists('packages\MonoDevelop.Addins.0.3.0\build\net40\MonoDevelop.Addins.targets')" />
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="addin-project.xml" />
   </ItemGroup>
   <ItemGroup>
     <AddinFile Include="Templates\Files\CS\Xwt.Image.xft.xml">
