@@ -20,6 +20,7 @@ Xwt Project: https://github.com/mono/xwt
   * Github (checkout repository, optional submodule registration support)
   * NuGet (Xwt is not yet published on NuGet, but you can use own NuGet packages built from source)
   * Local / GAC (e.g. Xwt packaged with XamarinStudio / Monodevelop)
+* Xwt.Drawing.Color Debugger Visualizer
 
 ## Installation
 Open the Xamarin Studio / MonoDevelop Addin Gallery and install the "[Xwt Project Support](http://addins.monodevelop.com/Project/Index/189)" addin. Sometimes XS / MD should be restarted to get the full functionality.
