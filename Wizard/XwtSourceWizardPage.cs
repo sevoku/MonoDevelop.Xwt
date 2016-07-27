@@ -43,6 +43,8 @@ namespace MonoDevelop.Xwt
 		XwtSourcePageWidget view;
 		XwtSource xwtReferenceSource;
 		bool xwtGitSubmodule;
+		string xwtGithubRepository;
+		string xwtGithubBranch;
 
 		public XwtTemplateWizard Wizard { get; private set; }
 
@@ -68,6 +70,26 @@ namespace MonoDevelop.Xwt
 			}
 		}
 
+		public string XwtGithubRepository {
+			get {
+				return xwtGithubRepository;
+			}
+			set {
+				xwtGithubRepository = value;
+				Wizard.Parameters ["XwtGithubRepository"] = value;
+			}
+		}
+
+		public string XwtGithubBranch {
+			get {
+				return xwtGithubBranch;
+			}
+			set {
+				xwtGithubBranch = value;
+				Wizard.Parameters ["XwtGithubBranch"] = value;
+			}
+		}
+
 		public override string Title {
 			get {
 				return GettextCatalog.GetString ("Configure Xwt Reference");
@@ -84,6 +106,9 @@ namespace MonoDevelop.Xwt
 			Wizard.Parameters ["Xwt.Gtk3.Installed"] = IsAssemblyInstalled ("Xwt.Gtk3").ToString ();
 			Wizard.Parameters ["Xwt.XamMac.Installed"] = IsAssemblyInstalled ("Xwt.XamMac").ToString ();
 			Wizard.Parameters ["Xwt.Mac.Installed"] = IsAssemblyInstalled ("Xwt.Mac").ToString ();
+
+			XwtGithubRepository = "mono/xwt";
+			XwtGithubBranch = "master";
 		}
 
 		bool IsAssemblyInstalled (string name)

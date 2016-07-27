@@ -141,6 +141,10 @@
     <Reference Include="Sharpen.Unix">
       <HintPath>packages\ngit2.2.1.0.20130924\lib\net40\Sharpen.Unix.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="Octokit">
+      <HintPath>packages\Octokit.0.20.0\lib\net45\Octokit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Manifest.addin.xml" />

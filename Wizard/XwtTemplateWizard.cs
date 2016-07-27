@@ -123,6 +123,10 @@ namespace MonoDevelop.Xwt
 		async Task AddXwtFromGithubAsync (Solution solution, string newProjectName, bool createSubmodule, ProgressMonitor monitor)
 		{
 			try {
+				var gitUrl = "https://github.com/" + (string.IsNullOrEmpty (Parameters ["XwtGithubRepository"]) ? Parameters ["XwtGithubRepository"] : "mono/xwt") + ".git";
+				var gitBranch = Parameters ["XwtGithubBranch"];
+				if (gitBranch == String.Empty)
+					gitBranch = "master";
 				var gitRepo = VersionControlService.GetRepository (solution) as GitRepository;
 				var xwt_proj = solution.FindProjectByName ("Xwt") as DotNetProject;
 
@@ -139,9 +143,9 @@ namespace MonoDevelop.Xwt
 				var xwt_path = xwt_proj == null ? solution.BaseDirectory.Combine ("Xwt") : xwt_proj.BaseDirectory.ParentDirectory;
 
 				monitor.BeginTask ("Configuring Xwt References...", 3);
-				monitor.BeginTask ("Cloning Xwt into " + xwt_path + "...", 1);
 
 				if (xwt_proj == null && !Directory.Exists (xwt_path)) {
+					monitor.BeginTask ("Cloning Xwt into " + xwt_path + "...", 1);
 					if (createSubmodule && gitRepo != null) {
 						monitor.BeginTask ("Initializing Xwt submodule in " + xwt_path + "...", 1);
 
@@ -152,9 +156,19 @@ namespace MonoDevelop.Xwt
 							using (var gm = new GitMonitor (monitor)) {
 								var add_submodule = git.SubmoduleAdd ();
 								add_submodule.SetPath ("Xwt");
-								add_submodule.SetURI ("git://github.com/mono/xwt");
+								add_submodule.SetURI (gitUrl);
 								add_submodule.SetProgressMonitor (gm);
 								add_submodule.Call ();
+
+								var submodule = new GitRepository (VersionControlService.GetVersionControlSystems ().First (id => id.Name == "Git"),
+												   gitRepo.RootPath.Combine ("Xwt"), gitUrl);
+
+								var submoduleRemote = submodule.GetCurrentRemote ();
+								submodule.Fetch (monitor, submoduleRemote);
+								if (submodule.GetCurrentBranch () != gitBranch) {
+									submodule.CreateBranch (gitBranch, submoduleRemote + "/" + gitBranch, "refs/remotes/" + submoduleRemote + "/" + gitBranch);
+									submodule.SwitchToBranch (monitor, gitBranch);
+								}
 							}
 						} catch {
 							Directory.Delete (xwt_path, true);
@@ -162,19 +176,19 @@ namespace MonoDevelop.Xwt
 						}
 
 						monitor.EndTask ();
-						monitor.BeginTask ("Comitting changes...", 1);
-
-						var commit = git.Commit ();
-						commit.SetMessage ("Add Xwt Submodule");
-						commit.Call ();
-
-						monitor.EndTask ();
 					} else {
 
 						var repo = new GitRepository ();
-						repo.Url = "git://github.com/mono/xwt";
+						repo.Url = gitUrl;
 						repo.Checkout (xwt_path, true, monitor);
+						var remote = repo.GetCurrentRemote ();
+						repo.Fetch (monitor, remote);
+						if (repo.GetCurrentBranch () != gitBranch) {
+							repo.CreateBranch (gitBranch, remote + "/" + gitBranch, "refs/remotes/" + remote + "/" + gitBranch);
+							repo.SwitchToBranch (monitor, gitBranch);
+						}
 					}
+					monitor.EndTask ();
 				}
 
 				SolutionFolder xwt_folder;
@@ -185,8 +199,6 @@ namespace MonoDevelop.Xwt
 					xwt_folder.Name = "Xwt";
 				}
 				solution.RootFolder.Items.Add (xwt_folder);
-
-				monitor.EndTask ();
 				monitor.Step (1);
 
 				monitor.BeginTask ("Adding Xwt Projects to Solution...", 7);
